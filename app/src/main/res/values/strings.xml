@@ -2,8 +2,8 @@
     <string name="app_name">ASU_CRIMESTATS</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label">Login</string>
+    <string name="second_fragment_label">Crimestats Home</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -43,4 +43,10 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="action_button">ActionButton</string>
+    <string name="enter_information">Enter Information</string>
+    <string name="your_name">Your Name</string>
+    <string name="asu_id">ASU ID</string>
+    <string name="login">Login</string>
+    <string name="asu_logo">ASU_LOGO</string>
 </resources>

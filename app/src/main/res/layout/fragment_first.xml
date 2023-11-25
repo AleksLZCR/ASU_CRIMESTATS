@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    tools:context=".FirstFragment"
+    android:clipToPadding="true">
+    <TextView
+        android:id="@+id/t_default"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:text="@string/enter_information"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="30sp" />
+    <EditText
+        android:id="@+id/edt_username"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
-
-        <Button
-            android:id="@+id/button_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/next"
-            app:layout_constraintBottom_toTopOf="@id/textview_first"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textview_first"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/lorem_ipsum"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_first" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/t_default"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="@string/your_name"
+        android:inputType="text"
+        android:autofillHints="" />
+    <EditText
+        android:id="@+id/edt_userID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_username"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="@string/asu_id"
+        android:inputType="textPassword"
+        android:autofillHints="" />
+    <Button
+        android:id="@+id/b_login"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edt_userID"
+        android:layout_marginTop="10dp"
+        android:text="@string/login" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/b_login"
+        android:src="@drawable/asu_logo"
+        android:contentDescription="@string/asu_logo" />
+</RelativeLayout>
