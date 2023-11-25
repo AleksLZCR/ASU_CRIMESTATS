@@ -49,4 +49,13 @@
     <string name="asu_id">ASU ID</string>
     <string name="login">Login</string>
     <string name="asu_logo">ASU_LOGO</string>
+    <string name="find_crimestats">Find Crimestats:</string>
+    <string name="street_hint">Enter Street (e.g. E LEMON ST)</string>
+    <string name="find_crimes_by_street">Find Crimes By Street</string>
+    <string name="building_prompt">Enter Building (e.g Manzanita Hall)</string>
+    <string name="find_crimes_by_building">Find Crimes By Building</string>
+    <string name="time_prompt">Enter Time (24 hr format; e.g 19:30)</string>
+    <string name="find_crimes_by_time">Find Crimes By Time</string>
+    <string name="report_temp_text">Report will populate here:</string>
+    <string name="welcome_msg">Welcome to ASU Crimestats</string>
 </resources>

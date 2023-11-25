@@ -8,10 +8,10 @@
     <TextView
         android:id="@+id/t_default"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:text="@string/enter_information"
+        android:text="@string/welcome_msg"
         android:textColor="@color/black"
         android:textAlignment="center"
         android:fontFamily="sans-serif-condensed"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/t_default"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="100dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:hint="@string/your_name"
@@ -36,7 +36,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:hint="@string/asu_id"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:autofillHints="" />
     <Button
         android:id="@+id/b_login"

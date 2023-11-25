@@ -1,35 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SecondFragment">
+    tools:context=".SecondFragment"
+    android:clipToPadding="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/t_default"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/find_crimestats"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="25sp" />
 
-        <Button
-            android:id="@+id/button_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toTopOf="@id/textview_second"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/edt_streetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/t_default"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="@string/street_hint"
+        android:inputType="text"
+        android:autofillHints="" />
 
-        <TextView
-            android:id="@+id/textview_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/lorem_ipsum"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_second" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+    <Button
+        android:id="@+id/b_find_crimes_by_street"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edt_streetName"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:text="@string/find_crimes_by_street" />
+
+    <EditText
+        android:id="@+id/edt_buildingName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/b_find_crimes_by_street"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="@string/building_prompt"
+        android:inputType="text"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/b_find_crimes_by_building"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edt_buildingName"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:text="@string/find_crimes_by_building" />
+
+    <EditText
+        android:id="@+id/edt_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/b_find_crimes_by_building"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="@string/time_prompt"
+        android:inputType="text"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/b_find_crimes_by_time"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edt_time"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="15dp"
+        android:text="@string/find_crimes_by_time" />
+
+    <TextView
+        android:id="@+id/report_view"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@id/b_find_crimes_by_time"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="#e8e1f5"
+        android:text="@string/report_temp_text"/>
+
+</RelativeLayout>
