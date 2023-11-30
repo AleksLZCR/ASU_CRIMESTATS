@@ -1,7 +1,6 @@
 package com.example.asu_crimestats
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,7 +8,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.example.asu_crimestats.database.DatabaseHelper
 import com.example.asu_crimestats.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -29,8 +30,51 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            fetchRecentCrimes()
+            Snackbar.make(view, "Fetching recent crimes", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+    }
+
+    private fun fetchRecentCrimes() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val connection = DatabaseHelper.getConnection()
+            try {
+                val statement = connection.createStatement()
+                val resultSet = statement.executeQuery("SELECT * FROM CaseFile ORDER BY Date_Reported DESC LIMIT 10")
+
+                val crimesList = mutableListOf<String>() // Placeholder for crime data
+
+                while (resultSet.next()) {
+                    // Extract data from each row
+                    val number = resultSet.getString("Number")
+                    val dateReported = resultSet.getDate("Date_Reported")
+                    val timeReported = resultSet.getTimestamp("Time_Reported")
+                    // ...extract other fields as needed
+
+                    val crimeDetails = "Report Number: $number, Date: $dateReported, Time: $timeReported"
+                    crimesList.add(crimeDetails)
+                }
+
+                // Update UI with this data
+                withContext(Dispatchers.Main) {
+                    updateUI(crimesList)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle errors appropriately
+            } finally {
+                connection?.close()
+            }
+        }
+    }
+
+    private fun updateUI(crimes: List<String>) {
+        // Update your UI here with the fetched data
+        // For example, display the crimes in a RecyclerView or ListView
+        // As this is a simple example, we'll just log the data
+        crimes.forEach { crime ->
+            println(crime) // Replace with actual UI update logic
         }
     }
 
