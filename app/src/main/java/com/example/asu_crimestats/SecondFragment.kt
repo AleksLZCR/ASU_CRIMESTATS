@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.asu_crimestats.database.DatabaseHelper
 import com.example.asu_crimestats.databinding.FragmentSecondBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -34,6 +39,7 @@ class SecondFragment : Fragment() {
     private lateinit var b_find_crimes_by_building  : Button
     private lateinit var b_find_crimes_by_time      : Button
 
+    private var queryString=""
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -59,6 +65,7 @@ class SecondFragment : Fragment() {
         b_find_crimes_by_building   = view.findViewById(R.id.b_find_crimes_by_building)
         b_find_crimes_by_time       = view.findViewById(R.id.b_find_crimes_by_time)
 
+        queryString=""
         // Add actions to the buttons:
         b_find_crimes_by_street.setOnClickListener{
             // Get text from appropriate text field
@@ -66,6 +73,9 @@ class SecondFragment : Fragment() {
 
             // When button is clicked, change the text view
             updateReportTextView("Querying DB for reports on street: $streetString")
+            queryString =
+                "SELECT c.*, s.Street_name AS StreetName FROM CaseFile c JOIN Street s ON c.Street_id = s.Street_id WHERE s.Street_Name = '$streetString';"
+            runQuery(queryString)
         }
 
         b_find_crimes_by_building.setOnClickListener{
@@ -74,20 +84,57 @@ class SecondFragment : Fragment() {
 
             // When button is clicked, change the text view
             updateReportTextView("Querying DB for reports on building: $buildingString")
+            queryString = "SELECT c.*, l.Location_id, l.Location_Name FROM CaseFile c JOIN Location l ON c.Location_id = l.Location_id JOIN person p ON l.Location_Name LIKE '%$buildingString%';"
         }
 
         b_find_crimes_by_time.setOnClickListener{
             // Get text from appropriate text field
             val timeString = time_text.text.toString()
-
             // When button is clicked, change the text view
             updateReportTextView("Querying DB for reports at time: $timeString")
+            queryString = "SELECT * FROM CaseFile WHERE Time_Occurred = '$timeString';"
+            runQuery(queryString)
+
+
+        }
+    }
+    private fun runQuery(queryText: String){
+        CoroutineScope(Dispatchers.IO).launch {
+            val connection = DatabaseHelper.getConnection()
+            try {
+                val statement = connection.createStatement()
+                val resultSet = statement.executeQuery(queryText)
+
+                val crimesList = mutableListOf<String>() // Placeholder for crime data
+
+                while (resultSet.next()) {
+                    // Extract data from each row
+                    val number = resultSet.getString("Number")
+                    val dateReported = resultSet.getDate("Date_Reported")
+                    val timeReported = resultSet.getTimestamp("Time_Reported")
+                    // ...extract other fields as needed
+
+                    val crimeDetails = "Report Number: $number, Date: $dateReported, Time: $timeReported\n"
+                    crimesList.add(crimeDetails)
+                }
+                if(crimesList.isEmpty()){
+                    crimesList.add("No Results")
+                }
+                // Update UI with this data
+                withContext(Dispatchers.Main) {
+                        updateReportTextView(crimesList.toString())
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle errors appropriately
+            } finally {
+                connection?.close()
+            }
         }
     }
     private fun updateReportTextView(newText: String){
         reportView.text = newText
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
