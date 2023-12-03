@@ -6,6 +6,41 @@
     tools:context=".SecondFragment"
     android:clipToPadding="true">
 
+    <ScrollView
+        android:layout_width="401dp"
+        android:layout_height="337dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-45dp"
+        android:clipToPadding="false"
+        android:fillViewport="false"
+        android:scrollbarStyle="insideInset">
+
+        <TextView
+            android:id="@+id/report_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginTop="11dp"
+            android:background="#e8e1f5"
+            android:fadeScrollbars="false"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="true"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="true"
+            android:text="@string/report_temp_text"
+            android:verticalScrollbarPosition="right" />
+    </ScrollView>
+
     <TextView
         android:id="@+id/t_default"
         android:layout_width="match_parent"
@@ -83,17 +118,5 @@
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="15dp"
         android:text="@string/find_crimes_by_time" />
-
-    <TextView
-        android:id="@+id/report_view"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_below="@id/b_find_crimes_by_time"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="10dp"
-        android:background="#e8e1f5"
-        android:text="@string/report_temp_text"/>
 
 </RelativeLayout>
