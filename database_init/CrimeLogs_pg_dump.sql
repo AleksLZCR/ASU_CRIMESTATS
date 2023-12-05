@@ -11,25 +11,10 @@ CREATE TABLE Report (
     Description VARCHAR(255)
 );
 
-
-CREATE TABLE Report_Fields (
-    Field_id SERIAL PRIMARY KEY,
-    Report_id INTEGER REFERENCES Report(Report_id)
-);
-
-
-CREATE TABLE Views (
-    User_id INTEGER REFERENCES person(User_id),
-    Report_id INTEGER REFERENCES Report(Report_id),
-    Number CHAR(12) REFERENCES CaseFile(Number)
-);
-
-
 CREATE TABLE Location (
     Location_id SERIAL PRIMARY KEY,
     Location_Name VARCHAR(60) UNIQUE
 );
-
 
 CREATE TABLE CrimeType (
     CrimeType_id SERIAL PRIMARY KEY,
@@ -48,6 +33,10 @@ CREATE TABLE Street (
     Street_Name VARCHAR(60) UNIQUE
 );
 
+CREATE TABLE Report_Fields (
+    Field_id SERIAL PRIMARY KEY,
+    Report_id INTEGER REFERENCES Report(Report_id)
+);
 
 CREATE TABLE CaseFile (
     Number CHAR(12) PRIMARY KEY,
@@ -60,6 +49,14 @@ CREATE TABLE CaseFile (
     Time_Occurred TIMESTAMP,
     Date_Occurred DATE
 );
+
+CREATE TABLE Views (
+    User_id INTEGER REFERENCES person(User_id),
+    Report_id INTEGER REFERENCES Report(Report_id),
+    Number CHAR(12) REFERENCES CaseFile(Number)
+);
+
+
 
 INSERT INTO Location (Location_id, Location_Name) VALUES (1, 'TLot 59');
 INSERT INTO Location (Location_id, Location_Name) VALUES (2, 'BAC (Business Administration C-Wing)');

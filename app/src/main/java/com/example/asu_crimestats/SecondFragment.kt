@@ -84,7 +84,9 @@ class SecondFragment : Fragment() {
 
             // When button is clicked, change the text view
             updateReportTextView("Querying DB for reports on building: $buildingString")
-            queryString = "SELECT c.*, l.Location_id, l.Location_Name FROM CaseFile c JOIN Location l ON c.Location_id = l.Location_id JOIN person p ON l.Location_Name LIKE '%$buildingString%';"
+            queryString =
+                "SELECT * FROM CaseFile JOIN Location ON CaseFile.Location_id = Location.Location_id JOIN CrimeType ON CaseFile.CrimeType_id = CrimeType.CrimeType_id JOIN Status ON CaseFile.Status_id = Status.Status_id JOIN Street ON CaseFile.Street_id = Street.Street_id WHERE Location.Location_Name LIKE '%$buildingString%';"
+            runQuery(queryString)
         }
 
         b_find_crimes_by_time.setOnClickListener{
